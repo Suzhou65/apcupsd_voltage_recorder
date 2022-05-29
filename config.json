@@ -1,0 +1,6 @@
+{
+  "schedule_config": 10,
+  "filename": "apcupsd_voltage_record.csv",
+  "prefix_date":"",
+  "prefix_voltage":""
+}
