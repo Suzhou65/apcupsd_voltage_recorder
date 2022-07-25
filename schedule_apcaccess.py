@@ -4,23 +4,23 @@ import time
 import schedule
 import voltage_recorder
 
-#Asking schedule minutes
-time_configuration = voltage_recorder.configuration()
+# Configuration path and filename
+config_path = "config.json"
+
+# Asking schedule minutes
+time_configuration = voltage_recorder.configuration(config_path)
 schedule_minutes = time_configuration["schedule_config"]
 
-#Raw filter configuration is needed
+# Raw filter configuration is needed
 def voltage_check():
-    result = voltage_recorder.apcupsd_upsfstats(upsfstats)
+    result = voltage_recorder.apcupsd_apcaccess()
     if type(result) is list:
-        print(result[1])
+        print(result)
         return result
     else:
         return False
 
-#CGI prograam, upsfstats URL:
-upsfstats = "http://192.168.0.1/upsfstats.cgi?host=127.0.0.1"
-
-#Scheduled configuration
+# Scheduled configuration
 schedule.every(schedule_minutes).minutes.do(voltage_check)
 # Running Loop
 print(f"Scheduled period is {schedule_minutes} minutes.\r\nPressing CTRL+C to exit voltage monitor.")
