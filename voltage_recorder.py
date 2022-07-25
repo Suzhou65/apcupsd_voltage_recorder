@@ -35,7 +35,7 @@ def configuration(config_path=()):
         #Dictionary
         initialize_config = {
             "schedule_config": input_schedule_minutes,
-            "record_path": recording_path,
+            "path_and_filename": recording_path,
             "raw_date": input_raw_date,
             "raw_voltage": input_raw_voltage,
             "prefix_date": "",
@@ -53,7 +53,7 @@ def apcupsd_apcaccess(config_path=(), separate=()):
     #Load config
     load_config = configuration(config_path)
     #Saving filename
-    recording_file = load_config["record_path"]
+    recording_file = load_config["path_and_filename"]
     #Row numbers of data
     date_row = load_config["row_date"]
     voltage_row = load_config["row_voltage"]
@@ -88,7 +88,7 @@ def apcupsd_upsfstats(upsfstats, config_path=(), separate=()):
     #Load config
     load_config = configuration(config_path)
     #Saving filename
-    recording_file = load_config["record_path"]
+    recording_file = load_config["path_and_filename"]
     #Row numbers of data
     date_row = load_config["row_date"]
     voltage_row = load_config["row_voltage"]

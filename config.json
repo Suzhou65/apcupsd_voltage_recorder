@@ -1,6 +1,6 @@
 {
   "schedule_config": 10,
-  "filename": "apcupsd_voltage_record.csv",
+  "path_and_filename": "apcupsd_voltage_record.csv",
   "row_date": 1,
   "row_voltage": 11,
   "prefix_date":"",

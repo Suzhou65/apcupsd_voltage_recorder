@@ -13,7 +13,7 @@ schedule_minutes = time_configuration["schedule_config"]
 
 # Raw filter configuration is needed
 def voltage_check():
-    result = voltage_recorder.apcupsd_apcaccess()
+    result = voltage_recorder.apcupsd_apcaccess(config_path)
     if type(result) is list:
         print(result)
         return result

@@ -6,6 +6,8 @@ import voltage_recorder
 
 # Configuration path and filename
 config_path = "config.json"
+# CGI prograam, upsfstats URL:
+upsfstats = "http://192.168.0.1/upsfstats.cgi?host=127.0.0.1"
 
 # Asking schedule minutes
 time_configuration = voltage_recorder.configuration(config_path)
@@ -13,15 +15,12 @@ schedule_minutes = time_configuration["schedule_config"]
 
 # Raw filter configuration is needed
 def voltage_check():
-    result = voltage_recorder.apcupsd_upsfstats(upsfstats)
+    result = voltage_recorder.apcupsd_upsfstats(upsfstats, config_path)
     if type(result) is list:
         print(result[1])
         return result
     else:
         return False
-
-# CGI prograam, upsfstats URL:
-upsfstats = "http://192.168.0.1/upsfstats.cgi?host=127.0.0.1"
 
 # Scheduled configuration
 schedule.every(schedule_minutes).minutes.do(voltage_check)
