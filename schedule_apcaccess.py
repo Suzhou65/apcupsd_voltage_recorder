@@ -30,6 +30,7 @@ try:
         time.sleep(1)
 except Exception as error_status:
     print(error_status)
+    sys.exit(0)
 except KeyboardInterrupt:
     print("\r\nThank you for using the voltage monitor.\r\nGoodBye ...")
     sys.exit(0)

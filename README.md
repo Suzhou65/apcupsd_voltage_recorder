@@ -23,7 +23,7 @@ Using schedule module for job scheduling, you can found the scheduling setting a
 
 Alternative solution is using Linux built-in ```Cron``` function.
 ### Configuration
-Store configuration as JSON format file, named config.json.
+Store configuration as JSON format file, named ```config.json```.
 
 You can editing the clean copy, which looks like this:
 ```json
@@ -32,8 +32,8 @@ You can editing the clean copy, which looks like this:
   "path_and_filename": "apcupsd_voltage_record.csv",
   "row_date": 1,
   "row_voltage": 11,
-  "prefix_date":"",
-  "prefix_voltage":""
+  "prefix_date":"DATE     :",
+  "prefix_voltage":"LINEV    :"
 }
 ```
 - ```schedule_config``` setting the execution period.
@@ -44,7 +44,7 @@ You can editing the clean copy, which looks like this:
 - ```prefix_voltage``` delete the prefix at voltage row.
 
 ### Cron mode
-Startup script by Linux built-in ```Cron``` function.
+Startup script by Linux built-in ```Cron``` function by ```crontab``` configuration.
 - Get voltage data from apcaccess
 ```shell
 SHELL=/bin/sh
@@ -58,7 +58,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 # |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
 # |  |  |  |  |
 # *  *  *  *  * user-name command to be executed
-0 */1   * * *   pi python /python_script/crontab_apcaccess.py
+0 */10   * * *   pi python /python_script/crontab_apcaccess.py
 #
 ```
 - Get voltage data from apcupsd-cgi program
@@ -74,7 +74,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 # |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
 # |  |  |  |  |
 # *  *  *  *  * user-name command to be executed
-0 */1   * * *   pi python /python_script/crontab_upsfstats.py
+0 */15   * * *   pi python /python_script/crontab_upsfstats.py
 #
 ```
 ### Schedule mode
@@ -110,3 +110,6 @@ GoodBye ...
 - requests
 - subprocess
 - BeautifulSoup
+### UPS monitor program
+- apcupsd
+- apcupsd-cgi
