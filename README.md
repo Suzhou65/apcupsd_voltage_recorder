@@ -11,6 +11,7 @@ Recording utility power voltages from apcupsd.
   * [Usage](#usage)
     + [Scheduling](#scheduling)
     + [Configuration](#configuration)
+    + [Web monitor address](#web-monitor-address)
     + [Cron mode](#cron-mode)
     + [Schedule mode](#schedule-mode)
  * [Dependencies](#dependencies)
@@ -22,6 +23,7 @@ Recording utility power voltages from apcupsd.
 Using schedule module for job scheduling, you can found the scheduling setting at configuration file.
 
 Alternative solution is using Linux built-in ```Cron``` function.
+
 ### Configuration
 Store configuration as JSON format file, named ```config.json```.
 
@@ -43,6 +45,17 @@ You can editing the clean copy, which looks like this:
 - ```prefix_date``` delete the prefix at datetime row.
 - ```prefix_voltage``` delete the prefix at voltage row.
 
+### Web monitor address
+This function need monitor's web address, can be LAN address.
+```python
+import voltage_recorder
+
+# Web monitor address
+upsfstats = "http://192.168.0.1/upsfstats.cgi?host=127.0.0.1"
+# Get result
+result = voltage_recorder.apcupsd_upsfstats(upsfstats)
+```
+
 ### Cron mode
 Startup script by Linux built-in ```Cron``` function by ```crontab``` configuration.
 - Get voltage data from apcaccess
@@ -58,7 +71,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 # |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
 # |  |  |  |  |
 # *  *  *  *  * user-name command to be executed
-0 */10   * * *   pi python /python_script/crontab_apcaccess.py
+*/10 *  *  *  * pi python /python_script/crontab_apcaccess.py
 #
 ```
 - Get voltage data from apcupsd-cgi program
@@ -74,9 +87,10 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 # |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
 # |  |  |  |  |
 # *  *  *  *  * user-name command to be executed
-0 */15   * * *   pi python /python_script/crontab_upsfstats.py
+*/15 *  *  *  * pi python /python_script/crontab_upsfstats.py
 #
 ```
+
 ### Schedule mode
 - Get voltage data from apcaccess
 ```
@@ -101,6 +115,7 @@ GoodBye ...
 ## Dependencies
 ### Python version
 - Python 3.6 or above
+
 ### Python module
 - sys
 - csv
@@ -110,6 +125,7 @@ GoodBye ...
 - requests
 - subprocess
 - BeautifulSoup
+
 ### UPS monitor program
 - apcupsd
 - apcupsd-cgi
